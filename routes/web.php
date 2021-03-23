@@ -32,9 +32,14 @@ Auth::routes();
     Route::get('/blank', [App\Http\Controllers\BackendController::class, 'blank'])->name('blank');
     Route::get('/buttons', [App\Http\Controllers\BackendController::class, 'buttons'])->name('buttons');
     Route::get('/cards', [App\Http\Controllers\BackendController::class, 'cards'])->name('cards');
-    Route::get('/charts', [App\Http\Controllers\BackendController::class, 'charts'])->name('charts');
+    Route::resource('/testimonial', [App\Http\Controllers\BackendController::class, 'testimonial'])->except(['create', 'show', 'edit', 'store']);
 
-    Route::get('/forget_password', [App\Http\Controllers\BackendController::class, 'forget_password'])->name('forget_password');
-    Route::get('/register', [App\Http\Controllers\BackendController::class, 'register'])->name('register');
+    Route::get('/forgot_password', [App\Http\Controllers\BackendController::class, 'forgot_password'])->name('forgot_password');
+    Route::get('/profile', [App\Http\Controllers\BackendController::class, 'profile'])->name('profile');
+    Route::get('/tables', [App\Http\Controllers\BackendController::class, 'tables'])->name('tables');
 
+    Route::get('/utilities_other', [App\Http\Controllers\BackendController::class, 'utilities_other'])->name('utilities_other');
+    Route::get('/utilities_border', [App\Http\Controllers\BackendController::class, 'utilities_border'])->name('utilities_border');
+    Route::get('/utilities_color', [App\Http\Controllers\BackendController::class, 'utilities_color'])->name('utilities_color');
+    Route::get('/utilities_animation', [App\Http\Controllers\BackendController::class, 'utilities_animation'])->name('utilities_animation');
  });

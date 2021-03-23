@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 class BackendController extends Controller
 {
     /**
@@ -81,8 +80,8 @@ class BackendController extends Controller
     {
         //
     }
-    public function charts(){
-        return view('layouts.backend.charts');
+    public function testimonial(){
+        return view('layouts.backend.testimonial');
     }
     public function cards(){
         return view('layouts.backend.cards');
@@ -96,7 +95,23 @@ class BackendController extends Controller
     public function buttons(){
         return view('layouts.backend.buttons');
     }
-    public function register(){
-        return view('layouts.backend.register');
+    public function profile(){
+        $users = DB::table('users')->select('id','name','email','password')->get();
+        return view('layouts.backend.profile',['users'=>$users]);
+    }
+    public function utilities_animation(){
+        return view('layouts.backend.utilities_animation');
+    }
+    public function utilities_border(){
+        return view('layouts.backend.utilities_border');
+    }
+    public function utilities_color(){
+        return view('layouts.backend.utilities_color');
+    }
+    public function utilities_other(){
+        return view('layouts.backend.utilities_other');
+    }
+    public function forgot_password(){
+        return view('layouts.backend.forgot_password');
     }
 }
