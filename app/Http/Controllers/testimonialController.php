@@ -1,9 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
+use App\Models\testimonial;
 use Illuminate\Http\Request;
-class BackendController extends Controller
+use App\Traits\UploadTrait;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+class testimonialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -12,17 +18,16 @@ class BackendController extends Controller
      */
     public function index()
     {
-        //
+       return view('layouts.backend.testimonial');                         
     }
-
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Request $request)
+    {   
+      print_r("create");
     }
 
     /**
@@ -32,19 +37,23 @@ class BackendController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
+    { 
+    $cover = $request->file('image');
+    $extension = $cover->getClientOriginalExtension();
+    Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
 
+        $task = testimonial::create(['name' => $request->name,'profession' => $request->profession,'description' => $request->description,'rating' => $request->rating,'image' =>$cover->getClientOriginalName(),'image' =>$cover->getFilename().'.'.$extension]);
+        return redirect('/testimonial')->with('success', 'Contact saved!');
+    }
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        
     }
 
     /**
@@ -79,39 +88,5 @@ class BackendController extends Controller
     public function destroy($id)
     {
         //
-    }
-    // public function testimonial(){
-    //     return view('layouts.backend.testimonial');
-    // }
-    public function cards(){
-        return view('layouts.backend.cards');
-    }
-    public function blank(){
-        return view('layouts.backend.blank');
-    }
-    public function tables(){
-        return view('layouts.backend.tables');
-    }
-    public function buttons(){
-        return view('layouts.backend.buttons');
-    }
-    public function profile(){
-        $users = DB::table('users')->select('id','name','email','password')->get();
-        return view('layouts.backend.profile',['users'=>$users]);
-    }
-    public function utilities_animation(){
-        return view('layouts.backend.utilities_animation');
-    }
-    public function utilities_border(){
-        return view('layouts.backend.utilities_border');
-    }
-    public function utilities_color(){
-        return view('layouts.backend.utilities_color');
-    }
-    public function utilities_other(){
-        return view('layouts.backend.utilities_other');
-    }
-    public function forgot_password(){
-        return view('layouts.backend.forgot_password');
     }
 }

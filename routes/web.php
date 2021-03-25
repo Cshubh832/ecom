@@ -32,8 +32,10 @@ Auth::routes();
     Route::get('/blank', [App\Http\Controllers\BackendController::class, 'blank'])->name('blank');
     Route::get('/buttons', [App\Http\Controllers\BackendController::class, 'buttons'])->name('buttons');
     Route::get('/cards', [App\Http\Controllers\BackendController::class, 'cards'])->name('cards');
-    Route::resource('/testimonial', [App\Http\Controllers\BackendController::class, 'testimonial'])->except(['create', 'show', 'edit', 'store']);
-
+    Route::resource('/testimonial','App\Http\Controllers\testimonialController');
+     // Route::get('/testimonial', [App\Http\Controllers\testimonialController::class, 'show'])->name('testimonial');
+     //Route::get('/testimonial', [App\Http\Controllers\testimonialController::class, 'show']);
+    
     Route::get('/forgot_password', [App\Http\Controllers\BackendController::class, 'forgot_password'])->name('forgot_password');
     Route::get('/profile', [App\Http\Controllers\BackendController::class, 'profile'])->name('profile');
     Route::get('/tables', [App\Http\Controllers\BackendController::class, 'tables'])->name('tables');

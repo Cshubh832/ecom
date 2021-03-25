@@ -96,6 +96,13 @@
                 <a class="nav-link" href="/testimonial">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Testimonial</span></a>
+                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="/buttons">Buttons</a>
+                        <a class="collapse-item" href="/cards">Cards</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Nav Item - Tables -->
@@ -138,8 +145,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2">
@@ -346,31 +352,27 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Testimonial</h1>
                                     </div>
-                                    <form class="user" method="post" action="">
+                                    <form class="user" method="post" action="{{ route('testimonial.store') }}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                            <input type="text" name="name" class="form-control form-control-user" id="exampleLastName"
                                                 placeholder="Enter Name">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
+                                            <input type="text" name="profession" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Enter Profession">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Enter Description">
+                                            <input type="text" name="description" class="form-control form-control-user" id="exampleInputPassword" placeholder="Enter Description">
                                         </div>
                                         <div class="form-group">
-                                            <input type="file" class="form-control">
+                                            <input type="file" name="image" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Enter Rating">
+                                            <input type="text" name="rating" class="form-control form-control-user" id="exampleInputPassword" placeholder="Enter Rating">
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Add Testimonial
-                                        </a>
+                                        <button class="btn btn-primary btn-user btn-block" name="submit">Add Testimonial</button>
                                       </form>
                                     <hr>
                                     <div class="text-center">
