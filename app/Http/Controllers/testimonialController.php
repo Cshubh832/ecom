@@ -38,11 +38,15 @@ class testimonialController extends Controller
      */
     public function store(Request $request)
     { 
+
     $cover = $request->file('image');
     $extension = $cover->getClientOriginalExtension();
     Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
+    $original_filename = $cover->getClientOriginalName();
+    $filename = $cover->getFilename().'.'.$extension;
+    $qwerty = $original_filename;
 
-        $task = testimonial::create(['name' => $request->name,'profession' => $request->profession,'description' => $request->description,'rating' => $request->rating,'image' =>$cover->getClientOriginalName(),'image' =>$cover->getFilename().'.'.$extension]);
+    $task = testimonial::create(['name' => $request->name,'profession' => $request->profession,'description' => $request->description,'rating' => $request->rating,'image' =>$qwerty]);
         return redirect('/testimonial')->with('success', 'Contact saved!');
     }
     /**
