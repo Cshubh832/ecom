@@ -32,7 +32,8 @@ Auth::routes();
     Route::get('/blank', [App\Http\Controllers\BackendController::class, 'blank'])->name('blank');
     Route::get('/buttons', [App\Http\Controllers\BackendController::class, 'buttons'])->name('buttons');
     Route::get('/cards', [App\Http\Controllers\BackendController::class, 'cards'])->name('cards');
-    Route::resource('/testimonial','App\Http\Controllers\testimonialController');
+    Route::resource('/all_testimonial','App\Http\Controllers\testimonialController');
+
      // Route::get('/testimonial', [App\Http\Controllers\testimonialController::class, 'show'])->name('testimonial');
      //Route::get('/testimonial', [App\Http\Controllers\testimonialController::class, 'show']);
     

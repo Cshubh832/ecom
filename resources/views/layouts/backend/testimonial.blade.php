@@ -93,14 +93,15 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="/testimonial">
+                <a class="nav-link collapsed" href="/" data-toggle="collapse" data-target="#collapseUtilities1"
+                    aria-expanded="true" aria-controls="collapseUtilities1">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Testimonial</span></a>
-                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"data-parent="#accordionSidebar">
+                   <div id="collapseUtilities1" class="collapse" aria-labelledby="headingTwo"data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="/buttons">Buttons</a>
-                        <a class="collapse-item" href="/cards">Cards</a>
+                        <h6 class="collapse-header">Testimonial</h6>
+                         <a class="collapse-item" href="/all_testimonial">Manage Testimonial</a>
+                        <a class="collapse-item" href="/all_testimonial/create">Add Testimonial</a>
                     </div>
                 </div>
             </li>
@@ -352,7 +353,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Testimonial</h1>
                                     </div>
-                                    <form class="user" method="post" action="{{ route('testimonial.store') }}" enctype="multipart/form-data">
+                                    <form class="user" method="post" action="{{ route('all_testimonial.store') }}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
                                             <input type="text" name="name" class="form-control form-control-user" id="exampleLastName"

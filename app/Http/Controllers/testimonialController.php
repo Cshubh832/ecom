@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use DB;
+
 class testimonialController extends Controller
 {
     /**
@@ -18,7 +19,8 @@ class testimonialController extends Controller
      */
     public function index()
     {
-       return view('layouts.backend.testimonial');                         
+       $users = DB::select('select * from testimonials');
+       return view('layouts.backend.all_testimonial',['users'=>$users]);                         
     }
     /**
      * Show the form for creating a new resource.
@@ -27,7 +29,7 @@ class testimonialController extends Controller
      */
     public function create(Request $request)
     {   
-      print_r("create");
+      return view('layouts.backend.testimonial'); 
     }
 
     /**
@@ -38,16 +40,12 @@ class testimonialController extends Controller
      */
     public function store(Request $request)
     { 
-
     $cover = $request->file('image');
     $extension = $cover->getClientOriginalExtension();
-    Storage::disk('public')->put($cover->getFilename().'.'.$extension,  File::get($cover));
-    $original_filename = $cover->getClientOriginalName();
     $filename = $cover->getFilename().'.'.$extension;
-    $qwerty = $original_filename;
-
-    $task = testimonial::create(['name' => $request->name,'profession' => $request->profession,'description' => $request->description,'rating' => $request->rating,'image' =>$qwerty]);
-        return redirect('/testimonial')->with('success', 'Contact saved!');
+    Storage::disk('public')->putFileAs('images', $cover, $filename);
+    $task = testimonial::create(['name' => $request->name,'profession' => $request->profession,'description' => $request->description,'rating' => $request->rating,'image' =>$filename]);
+        return redirect('/all_testimonial/create')->with('success', 'Contact saved!');
     }
     /**
      * Display the specified resource.
@@ -59,7 +57,6 @@ class testimonialController extends Controller
     {
         
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -91,6 +88,7 @@ class testimonialController extends Controller
      */
     public function destroy($id)
     {
-        //
+    DB::delete('delete from testimonials where id = ?',[$id]);
+    return view('layouts.backend.testimonial'); 
     }
 }
