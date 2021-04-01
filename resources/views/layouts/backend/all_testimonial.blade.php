@@ -353,9 +353,13 @@
                     </ul>
 
                 </nav>
+
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
 			    <div class="container">
+                @if($errors->any())
+                <h4>{{$errors->first()}}</h4>
+                @endif
 			        <!-- Outer Row -->
 			        <div class="row justify-content-center">
 			            <div class="col-xl-12 col-lg-12 col-md-12">
@@ -373,26 +377,24 @@
 											    <th>Description</th>
 											    <th>Rating</th>
 											    <th>Action</th>
-
 											  </tr>
                                               @foreach ($users as $user)
                                                 <tr>
-                                                <td>{{ $user->id }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->profession }}</td>
                                                 <td>{{ $user->description }}</td>
                                                 <td>{{ $user->rating }}</td>
+                                                <td><img src="{{url('/storage/app/public/images/' . $user->image)}}" class="img-thumbnail">
+                                                    <img src="{{url('storage/app/public/images/'.$user->image)}}">
+                                                </td>
                                                 <td>
-                                                    <form action="{{ route('all_testimonial.destroy', $user->id) }}" method="POST">
-                                                        @method('DELETE')
-                                                        @csrf
-                                                        <button>Delete User</button>
-                                                    </form>
-                                             {{--    <button type="button" class="btn btn-primary mb-1" data-toggle="modal" data-target="#viewModal"><i class="fa fa-eye"></i></button>
-                                                <a href="{{ route('all_testimonial.destroy', $user->id) }}"><button type="button" class="btn btn-danger mb-1" data-toggle="modal"data-target="#deleteModal"><i class="fa fa-trash"></i>
-                                                </button> --}}
-                                                 
-                                                </a>
+                                                <form action="{{ route('all_testimonial.destroy', $user->id) }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button class="btn btn-danger mb-1"><i class="fa fa-trash"></i></button>
+                                                </form>
+                                                <button type="button" class="btn btn-primary mb-1" data-toggle="modal" data-target="#viewModal"><i class="fa fa-eye"></i>
+                                                </button>              
                                                 </td>
                                                 </tr>
                                                 @endforeach

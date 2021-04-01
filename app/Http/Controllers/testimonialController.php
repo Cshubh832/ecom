@@ -31,7 +31,6 @@ class testimonialController extends Controller
     {   
       return view('layouts.backend.testimonial'); 
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -89,6 +88,8 @@ class testimonialController extends Controller
     public function destroy($id)
     {
     DB::delete('delete from testimonials where id = ?',[$id]);
-    return view('layouts.backend.testimonial'); 
+    return redirect()->back()->withErrors(['Deleted Successfully', 'The Message']); 
+    //return Redirect::back()->withErrors(['msg', 'The Message']);
+    //return view('layouts.backend.testimonial'); 
     }
 }
